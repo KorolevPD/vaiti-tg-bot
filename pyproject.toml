@@ -1,0 +1,69 @@
+[project]
+name = "tg-bot"
+version = "0.1.0"
+description = "Telegram-бот для сервиса Вайти"
+authors = [
+    {name = "Pavel Korolev", email = "pdkorolev@yandex.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiogram (>=3.22.0,<4.0.0)",
+    "redis (>=7.0.1,<8.0.0)",
+    "pydantic (>=2.4.1,<2.12)",
+    "pydantic-settings (>=2.12.0,<3.0.0)",
+    "python-dotenv (>=1.2.1,<2.0.0)",
+    "fastapi (>=0.123.9,<0.124.0)",
+    "uvicorn (>=0.38.0,<0.39.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "pyyaml (>=6.0.3,<7.0.0)",
+    "aiohttp-socks (>=0.11.0,<0.12.0)",
+]
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.1,<10.0.0)",
+    "pytest-asyncio (>=1.3.0,<2.0.0)",
+    "black (>=25.11.0,<26.0.0)",
+    "isort (>=7.0.0,<8.0.0)",
+    "mypy (>=1.18.2,<2.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)",
+    "types-pyyaml (>=6.0.12.20260510,<7.0.0.0)",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
+
+[tool.flake8]
+max-line-length = 80
+extend-ignore = ["E203", "W503"]
+
+[tool.black]
+line-length = 79
+target-version = ['py311']
+preview = true
+
+[tool.isort]
+profile = "wemake"
+line_length = 79
+combine_as_imports = true
+force_sort_within_sections = true
+known_third_party = ["alembic"]
+
+[tool.mypy]
+strict = true
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-ra -sv --tb=short"
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning"
+]
+asyncio_mode = "auto"
